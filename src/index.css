@@ -8,6 +8,11 @@ html, body {
     display: flex;
 }
 
+#link {
+    text-decoration: none;
+    color: rgb(46,46,46);
+}
+
 
 nav {
     height: 100vh;
@@ -71,4 +76,46 @@ nav .icon {
     display: flex;
     justify-content: center;
 }
-
+.ticket-card .priority-display {
+    display: flex;
+    justify-content: center;
+}
+.ticket-card .priority-display .star-container {
+    display: flex;
+}
+.ticket-card .priority-display .star-container h3 {
+    margin: 7px;
+    padding: 0;
+}
+.ticket-card .progress-display {
+    min-width: 200px;
+}
+.ticket-card .progress-bar {
+    background-color: rgb(158, 158, 158);
+    height: 30px;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+}
+.ticket-card .progress-bar .progress-indicator {
+    background-color: rgb(184, 104, 175);
+    height: 100%;
+}
+.ticket-card .delete-block{
+    background-color: rgb(211, 211, 211);
+    width: 50px;
+    margin: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ticket-card .delete-block .delete-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: rgb(61, 61, 61);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+}
