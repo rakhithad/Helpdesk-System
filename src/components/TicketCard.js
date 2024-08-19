@@ -1,6 +1,4 @@
 import { Link } from 'react-router-dom'
-
-
 import StatusDisplay from "./StatusDisplay"
 import PriorityDisplay from "./PriorityDisplay"
 import ProgressDisplay from "./ProgressDisplay"

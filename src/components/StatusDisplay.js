@@ -1,5 +1,4 @@
 const StatusDisplay = ({status}) => {
-
     const getColor = (status) => {
         let color
         switch(status) {
@@ -17,9 +16,6 @@ const StatusDisplay = ({status}) => {
         }
         return color
     }
-
-
-
 
     return (
         <div className="status-display" style={{ backgroundColor: getColor(status)}}>{status}</div>

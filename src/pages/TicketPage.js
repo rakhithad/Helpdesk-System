@@ -1,17 +1,16 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
-//import categoriesContext from '../context'
+import CategoriesContext from '../context'
 
 const TicketPage = ({editMode}) => {
-
     const [formData, setFormData] = useState({
         status: 'not started',
         progress: 0,
         timeStamp: new Date().toISOString(),
     })
 
-    //const {categories, setCategories} = useContext(categoriesContext)
+    const {categories, setCategories} = useContext(CategoriesContext)
 
     const navigate = useNavigate()
 
@@ -39,9 +38,8 @@ const TicketPage = ({editMode}) => {
         )
     }
 
-    const categories = ['test1','test2']
 
-    console.log(formData)
+    
 
     return (
         <div className="ticket">

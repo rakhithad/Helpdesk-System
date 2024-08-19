@@ -1,8 +1,8 @@
 import { createContext } from "react"
 
-const categoriesContext = createContext({
+const CategoriesContext = createContext({
     categories: null,
     setCategories: () => {}
 })
 
-export default categoriesContext
+export default CategoriesContext
