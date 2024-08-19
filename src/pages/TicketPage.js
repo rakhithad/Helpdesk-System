@@ -1,17 +1,32 @@
 import {useState} from 'react'
+import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
+//import categoriesContext from '../context'
 
-const TicketPage = () => {
+const TicketPage = ({editMode}) => {
 
-    const [FormData, setFormData] = useState({
+    const [formData, setFormData] = useState({
         status: 'not started',
         progress: 0,
         timeStamp: new Date().toISOString(),
     })
 
-    const  editMode = false
+    //const {categories, setCategories} = useContext(categoriesContext)
 
-    const handleSubmit = () => {
-        console.log('submitted')
+    const navigate = useNavigate()
+
+    const handleSubmit = async(e) => {
+        e.preventDefault()
+        
+        if(!editMode) {
+            const response = await axios.post('http://localhost:8000/tickets', {
+                formData
+            })
+            const success = response.status === 200
+            if(success) {
+                navigate('/')
+            }
+        }
     }
     const handleChange = (e) => {
         const value = e.target.value
@@ -26,7 +41,7 @@ const TicketPage = () => {
 
     const categories = ['test1','test2']
 
-    console.log(FormData)
+    console.log(formData)
 
     return (
         <div className="ticket">
@@ -35,45 +50,45 @@ const TicketPage = () => {
                 <form onSubmit={handleSubmit}>
                     <section>
                         <label htmlFor="title">Title</label>
-                        <input id="title" name="title" type="text" onChange={handleChange} required={true} value={FormData.title}></input>
+                        <input id="title" name="title" type="text" onChange={handleChange} required={true} value={formData.title}></input>
 
                         <label htmlFor="">Description</label>
-                        <input id="description" name="description" type="text" onChange={handleChange} required={true} value={FormData.description}></input>
+                        <input id="description" name="description" type="text" onChange={handleChange} required={true} value={formData.description}></input>
 
                         <label htmlFor="category">Category</label>
-                        <select id="category" name="category" type="text" onChange={handleChange} required={true} value={FormData.category}>
+                        <select id="category" name="category" type="text" onChange={handleChange} required={true} value={formData.category || categories[0]}>
                             {categories?.map((category, _index) => (
                                 <option key={_index} value={category}>{category}</option>
                             ))}
                         </select>
                         <label htmlFor="new-category">New Category</label>
-                        <input id="new-category" name="category" type="text" onChange={handleChange} required={true} value={FormData.title}></input>
+                        <input id="new-category" name="category" type="text" onChange={handleChange} required={true} value={formData.title}></input>
 
                         <label>Priority</label>
                         <div className="multiple-input-container">
-                            <input id="priority-1" name="priority" type="radio" onChange={handleChange} value={1} checked={FormData.priority === 1}></input>
+                            <input id="priority-1" name="priority" type="radio" onChange={handleChange} value={1} checked={formData.priority == 1}></input>
                             <label htmlFor="priority-1">1</label>
-                            <input id="priority-2" name="priority" type="radio" onChange={handleChange} value={2} checked={FormData.priority === 2}></input>
+                            <input id="priority-2" name="priority" type="radio" onChange={handleChange} value={2} checked={formData.priority == 2}></input>
                             <label htmlFor="priority-2">2</label>
-                            <input id="priority-3" name="priority" type="radio" onChange={handleChange} value={3} checked={FormData.priority === 3}></input>
+                            <input id="priority-3" name="priority" type="radio" onChange={handleChange} value={3} checked={formData.priority == 3}></input>
                             <label htmlFor="priority-3">3</label>
-                            <input id="priority-4" name="priority" type="radio" onChange={handleChange} value={4} checked={FormData.priority === 4}></input>
+                            <input id="priority-4" name="priority" type="radio" onChange={handleChange} value={4} checked={formData.priority == 4}></input>
                             <label htmlFor="priority-4">4</label>
-                            <input id="priority-5" name="priority" type="radio" onChange={handleChange} value={5} checked={FormData.priority === 5}></input>
+                            <input id="priority-5" name="priority" type="radio" onChange={handleChange} value={5} checked={formData.priority == 5}></input>
                             <label htmlFor="priority-5">5</label>
                         </div>
                         {editMode &&
                         <>
-                        <input type="range" id="progress" name="progress" value={FormData.progress} min="0" max="100" onChange={handleChange}></input>
+                        <input type="range" id="progress" name="progress" value={formData.progress} min="0" max="100" onChange={handleChange}></input>
                         <label htmlFor="progress">progress</label>
                         
                         
                         <label>Status</label>
-                        <select name="status" onChange={handleChange} value={FormData.status}>
-                            <option selected={FormData.status === 'done'} value='done'>done</option>
-                            <option selected={FormData.status === 'working on it'} value='working on it'>working on it</option>
-                            <option selected={FormData.status === 'stuck'} value='stuck'>stuck</option>
-                            <option selected={FormData.status === 'not started'} value='not started'>not started</option>
+                        <select name="status" onChange={handleChange} value={formData.status}>
+                            <option selected={formData.status === 'done'} value='done'>done</option>
+                            <option selected={formData.status === 'working on it'} value='working on it'>working on it</option>
+                            <option selected={formData.status === 'stuck'} value='stuck'>stuck</option>
+                            <option selected={formData.status === 'not started'} value='not started'>not started</option>
                         </select>
                         </>
                         }
@@ -82,7 +97,7 @@ const TicketPage = () => {
                     </section>
                     <section>
                     <label htmlFor="owner">owner</label>
-                    <input id="owner" name="owner" type="text" onChange={handleChange} required={true} value={FormData.owner}></input>
+                    <input id="owner" name="owner" type="text" onChange={handleChange} required={true} value={formData.owner}></input>
                     </section>
                 </form>
             </div>

@@ -1,6 +1,33 @@
+import { useEffect } from 'react'
 import TicketCard from '../components/TicketCard'
+// import axios from 'axios'
+// import { useState,useEffect,useContext } from 'react'
+// import { categoriesContext } from '../context'
 
 const Dashboard = () => {
+    // const [tickets, setTickets] = useState(null)
+    // const [categories, setCategories] = useContext(categoriesContext)
+    
+    // useEffect(async () => {
+    //     const response = await axios.get('http://localhost:8000/tickets')
+        
+    //     const dataObject = response.data.data
+
+    //     const arrayOfKeys = Object.keys(dataObject)
+    //     const arrayOfData = Object.keys(dataObject).map((keys) => dataObject[key])
+    //     const formattedArray = []
+    //     arrayOfKeys.forEach((key, index) => {
+    //         const formattedData = { ...arrayOfData[index]}
+    //         formattedData['documentId'] = key
+    //         formattedArray.push(formattedData)
+    //     })
+    //     setTickets(formattedArray)
+    // }, [])
+
+
+    // useEffect(() => {
+    //     setCategories([...new set(tickets?.map(({category}) => category))])
+    // }, [tickets])
 
     const tickets = [
         {
@@ -35,13 +62,15 @@ const Dashboard = () => {
             timestamp: "2041-12-05T1208:00Z"
         }
     ]
+
+
     const colors =['rgb(255,179,186)', 'rgb(255,221,186)', 'rgb(255,223,186)', 'rgb(186,255,255)', 'rgb(186,201,255', 'rgb(255,186,255)']
 
     const uniqueCategories = [
         ...new Set(tickets?.map(({category}) => category))
     ]
 
-    console.log(uniqueCategories)
+    
     return (
         <div className="dashboard">
             <h1>My Projects</h1>
