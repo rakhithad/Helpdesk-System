@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import useState from 'react'
+import { useState } from 'react'
 import Nav from './components/Nav'
 import Dashboard from './pages/Dashboard'
 import TicketPage from './pages/TicketPage'
